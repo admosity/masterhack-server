@@ -7,7 +7,7 @@ var Issue = mongoose.model('Issue');
 
 
 router.route('/')
-  .getn(function (req, res) {
+  .get(function (req, res) {
     var amount = req.body.amount;
     var issueId = req.params.issue_id;
 
