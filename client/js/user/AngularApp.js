@@ -46,7 +46,9 @@ app.config(function($urlRouterProvider, $locationProvider, $urlMatcherFactoryPro
     $('body').addClass(toState.name);
 
   });
-});
+})
+
+;
 
 angular.element(document).ready(function() {
   angular.bootstrap(document,['App']);
