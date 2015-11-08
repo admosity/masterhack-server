@@ -3,6 +3,7 @@
  */
 var express = require('express');
 var session = require('express-session');
+var cors = require('cors');
 var MongoStore = require('connect-mongo')(session);
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
@@ -53,6 +54,7 @@ app.use('/', serveStatic(__dirname + '/public', {'index': ['index.html']}));
 app.use('/node_modules', serveStatic(__dirname + (development ? '/../node_modules' : '/node_modules')));
 // app.use(favicon(__dirname + '/favicon.ico'));
 
+app.use(cors());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
