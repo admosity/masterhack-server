@@ -40,6 +40,7 @@
     "require-directory": "^2.1.1",
     "serve-favicon": "^2.3.0",
     "serve-static": "^1.10.0",
+    "shortid": "^2.2.4",
     "simplify-commerce": "^1.2.0"
   },
   "devDependencies": {
