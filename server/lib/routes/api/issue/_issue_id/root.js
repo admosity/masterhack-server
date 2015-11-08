@@ -17,3 +17,5 @@ router.route('/')
       return res.ok(issue);
     });
   });
+
+module.exports = router;
