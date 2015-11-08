@@ -86,7 +86,11 @@ router.route('/')
     }
   })
   .then(function() {
+    Issue.find(query).lean().exec(function (err, issues) {
+      if(err) return res.error(500, '6da1e876-6b97-4474-b515-b5cbfc93fef8');
 
+      return res.ok(issues);
+    })
   })
   .catch(function () {
     return res.error(500, 'de65c270-fb9b-4567-8294-b28f06b03ad3');
