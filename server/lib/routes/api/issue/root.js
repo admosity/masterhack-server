@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var geocoder = require('geocoder');
 var router = require('express').Router({
   mergeParams: true
 });
@@ -41,6 +42,23 @@ router.route('/')
 })
 
 .get(function(req, res) {
+  // get issues by various query
+
+  var query = {};
+
+
+  var location = req.query.location;
+  var distance = req.query.distance || 5;
+
+  new Promise(function(resolve, reject) {
+    if(location) {
+      query.loc = {
+        $near: [latitude, longitude],
+        $maxDistance: maxDistance
+      }
+    }
+  })
+
 
 });
 
