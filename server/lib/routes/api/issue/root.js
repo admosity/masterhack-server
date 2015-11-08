@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var geocoder = require('geocoder');
+var shortid = require('shortid');
 var nconf = require('nconf');
 var router = require('express').Router({
   mergeParams: true
@@ -38,6 +39,10 @@ router.route('/pay').post(function(req, res) {
   var token = req.body.token;
   var amount = req.body.amount;
   var referenceId = Math.random();//req.body.referenceId;
+  if(amount < 1){
+    //Minimum requirement is $1
+    return res.error();
+  }
   processPayment(token, amount, referenceId, function(err, payment){
     res.ok("test is ok!", err, payment);
   })
