@@ -13,7 +13,15 @@ router.post('/login', passport.authenticate('local'), function(req, res) {
 
 router.post('/signup', function (req, res) {
 
-
+  var firstName = req.body.firstName;
+  var lastName = req.body.lastName;
+  var email = req.body.email;
+  var address1 = req.body.address1;
+  var address2 = req.body.address2;
+  var city = req.body.city;
+  var state = req.body.state;
+  var zip = req.body.zip;
+  var password = req.body.password;
 
   User.findOne({email: email}, function(err, user) {
     if(user) {
@@ -25,23 +33,30 @@ router.post('/signup', function (req, res) {
       });
     } else {
       return bcrypt.genSalt(10, function(err, salt) {
-          bcrypt.hash(password, salt, function(err, hash) {
-            if(err) return res.error('d36baf73-3925-4b51-9f3c-5e2230091a1f');
-            var newUser = new User({
-              email: email,
-              password: hash,
-            });
+        bcrypt.hash(password, salt, function(err, hash) {
+          if(err) return res.error('d36baf73-3925-4b51-9f3c-5e2230091a1f');
+          var newUser = new User({
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            address1: address1,
+            address2: address2,
+            city: city,
+            state: state,
+            zip: zip,
+            password: hash,
+          });
 
-            newUser.save(function(err) {
-              if(err) return res.error('6a693432-6277-4897-a589-dae02ab893be');
-              return req.login(newUser, function () {
-                return res.ok({
-                  _id: newUser._id,
-                  email: newUser.email,
-                });
+          newUser.save(function(err) {
+            if(err) return res.error('6a693432-6277-4897-a589-dae02ab893be');
+            return req.login(newUser, function () {
+              return res.ok({
+                _id: newUser._id,
+                email: newUser.email,
               });
             });
           });
+        });
       });
     }
   })
