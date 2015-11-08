@@ -1,9 +1,6 @@
 var mongoose = require('mongoose');
-<<<<<<< HEAD
 var geocoder = require('geocoder');
-=======
 var nconf = require('nconf');
->>>>>>> a3967c625d7ac82455e6938c9177ad935de36bde
 var router = require('express').Router({
   mergeParams: true
 });
@@ -29,7 +26,7 @@ function processPayment(token, amount, referenceId, cb){
           cb(errData.data.error.message);
           return;
       }
-   
+
       console.log("Payment Status: " + data.paymentStatus);
       cb(null, data.paymentStatus);
   });
@@ -83,10 +80,16 @@ router.route('/')
   new Promise(function(resolve, reject) {
     if(location) {
       query.loc = {
-        $near: [latitude, longitude],
-        $maxDistance: maxDistance
+        $near: location,
+        $maxDistance: distance
       }
     }
+  })
+  .then(function() {
+
+  })
+  .catch(function () {
+    return res.error(500, 'de65c270-fb9b-4567-8294-b28f06b03ad3');
   })
 
 
