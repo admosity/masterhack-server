@@ -11,7 +11,8 @@ router.route('/')
     var amount = req.body.amount;
     var issueId = req.params.issue_id;
 
-
+    if(amount < 1) return res.error(400, 'ef700d07-1a50-42f0-9c6e-3c83d05467d9');
+    
     Issue.findByIdAndUpdate(issueId, {
       $inc: {
         pledged: amount
