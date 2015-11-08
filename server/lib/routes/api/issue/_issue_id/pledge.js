@@ -25,7 +25,9 @@ router.route('/')
     }, {new: true}).lean().exec(function (err, issue) {
       if(err) return res.error('162817d2-4916-4408-87fb-87a0de6f2202');
       // TODO: Add payment
-      
+
       return res.ok(issue);
     });
   });
+
+module.exports = router;
