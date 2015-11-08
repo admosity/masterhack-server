@@ -105,7 +105,7 @@ router.route('/')
     }
   })
   .then(function() {
-    Issue.find(query).sort('-createdOn').lean().exec(function (err, issues) {
+    Issue.find(query).select('-pledgers').sort('-createdOn').lean().exec(function (err, issues) {
       if(err) return res.error(500, '6da1e876-6b97-4474-b515-b5cbfc93fef8');
 
       return res.ok(issues);
