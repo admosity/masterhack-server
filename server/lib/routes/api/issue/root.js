@@ -5,6 +5,7 @@ var router = require('express').Router({
   mergeParams: true
 });
 var isLoggedIn = require('lib/middleware/isLoggedIn');
+var Simplify = require("simplify-commerce");
 
 client = Simplify.getClient({
   publicKey: nconf.get('SIMPLIFY_COMMERCE_PUBLIC'),
@@ -49,9 +50,9 @@ router.route('/')
   }
 
   var issue = new Issue({
-    image: image
-    description: description
-    pledged: pledged
+    image: image,
+    description: description,
+    pledged: pledged,
     loc: loc,
     pledgers: [{
       who: req.user,
