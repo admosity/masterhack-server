@@ -33,11 +33,11 @@ function processPayment(token, amount, referenceId, cb){
   });
 }
 //TEST PAYMENT
-router.route('/pay').post(isLoggedIn, function(req, res) {
-
+router.route('/pay').post(function(req, res) {
+  console.log("PAY ENDPOINT!");
   var token = req.body.token;
   var amount = req.body.amount;
-  var referenceId = req.body.referenceId;
+  var referenceId = Math.random();//req.body.referenceId;
   processPayment(token, amount, referenceId, function(err, payment){
     res.ok("test is ok!", err, payment);
   })
