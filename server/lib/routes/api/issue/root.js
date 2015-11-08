@@ -91,11 +91,17 @@ router.route('/')
   var distance = req.query.distance || 5;
 
   new Promise(function(resolve, reject) {
+
     if(location) {
-      query.loc = {
-        $near: location,
-        $maxDistance: distance
-      }
+      geocoder.geocode(location, function ( err, data ) {
+        // do something with data
+        var location = data.results[0].geometry.location;
+        query.loc = {
+          $near: [location.lng, location.lat],
+          $maxDistance: distance
+        }
+        resolve();
+      });
     }
   })
   .then(function() {
