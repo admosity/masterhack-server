@@ -38,7 +38,7 @@ router.route('/pay').post(function(req, res) {
   console.log("PAY ENDPOINT!");
   var token = req.body.token;
   var amount = req.body.amount;
-  var referenceId = Math.random();//req.body.referenceId;
+  var referenceId = shortid.generate();
   if(amount < 1){
     //Minimum requirement is $1
     return res.error();
