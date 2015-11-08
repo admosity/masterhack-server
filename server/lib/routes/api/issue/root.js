@@ -15,23 +15,35 @@ client = Simplify.getClient({
 function processPayment(token, amount, referenceId, cb){
   //Multiply amount by 100 since 1000 = $10
   client.payment.create({
-      amount : amount * 100,
-      token : token,
-      description : "payment description",
-      reference : referenceId,
-      currency : "USD"
+    amount : amount * 100,
+    token : token,
+    description : "payment description",
+    reference : referenceId,
+    currency : "USD"
   }, function(errData, data){
-      if(errData){
-          console.error("Error Message: " + errData.data.error.message);
-          // handle the error
-          cb(errData.data.error.message);
-          return;
-      }
+    if(errData){
+      console.error("Error Message: " + errData.data.error.message);
+      // handle the error
+      cb(errData.data.error.message);
+      return;
+    }
 
-      console.log("Payment Status: " + data.paymentStatus);
-      cb(null, data.paymentStatus);
+    console.log("Payment Status: " + data.paymentStatus);
+    cb(null, data.paymentStatus);
   });
 }
+//TEST PAYMENT
+router.route('/pay').post(isLoggedIn, function(req, res) {
+
+  var token = req.body.token;
+  var amount = req.body.amount;
+  var referenceId = req.body.referenceId;
+  processPayment(token, amount, referenceId, function(err, payment){
+    res.ok("test is ok!", err, payment);
+  })
+
+}
+
 
 
 var Issue = mongoose.model('Issue');
