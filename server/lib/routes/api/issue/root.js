@@ -22,9 +22,9 @@ function processPayment(token, amount, referenceId, cb){
     currency : "USD"
   }, function(errData, data){
     if(errData){
-      console.error("Error Message: " + errData.data.error.message);
+      console.error("Error Message: " + errData);
       // handle the error
-      cb(errData.data.error.message);
+      cb(errData);
       return;
     }
 
