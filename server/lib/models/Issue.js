@@ -20,7 +20,6 @@ var IssueSchema = new Schema({
 
   createdOn: { type: Date, default: Date.now },
 
-
 }, {collection: 'Issue'});
 
 mongoose.model('Issue', IssueSchema);

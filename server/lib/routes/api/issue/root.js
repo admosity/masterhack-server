@@ -1,9 +1,39 @@
 var mongoose = require('mongoose');
+<<<<<<< HEAD
 var geocoder = require('geocoder');
+=======
+var nconf = require('nconf');
+>>>>>>> a3967c625d7ac82455e6938c9177ad935de36bde
 var router = require('express').Router({
   mergeParams: true
 });
 var isLoggedIn = require('lib/middleware/isLoggedIn');
+
+client = Simplify.getClient({
+  publicKey: nconf.get('SIMPLIFY_COMMERCE_PUBLIC'),
+  privateKey: nconf.get('SIMPLIFY_COMMERCE_PRIVATE')
+});
+
+function processPayment(token, amount, referenceId, cb){
+  //Multiply amount by 100 since 1000 = $10
+  client.payment.create({
+      amount : amount * 100,
+      token : token,
+      description : "payment description",
+      reference : referenceId,
+      currency : "USD"
+  }, function(errData, data){
+      if(errData){
+          console.error("Error Message: " + errData.data.error.message);
+          // handle the error
+          cb(errData.data.error.message);
+          return;
+      }
+   
+      console.log("Payment Status: " + data.paymentStatus);
+      cb(null, data.paymentStatus);
+  });
+}
 
 
 var Issue = mongoose.model('Issue');
