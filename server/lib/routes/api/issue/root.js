@@ -42,7 +42,7 @@ router.route('/pay').post(isLoggedIn, function(req, res) {
     res.ok("test is ok!", err, payment);
   })
 
-}
+});
 
 
 
