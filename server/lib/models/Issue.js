@@ -15,7 +15,7 @@ var IssueSchema = new Schema({
 
   pledgers: [{
     who: Schema.Types.ObjectId, ref: 'User'
-    amount: Number
+    amount: { type: Number, default: 0 },
   }]
 
 
